@@ -7,6 +7,7 @@ import { auth } from "./src/firebase/config";
 import Register from './src/paginas/Register/Register';
 // import Login from './src/paginas/Login/Login';
 import Home from './src/paginas/Home';
+import Camara from './src/components/Camera/Camera';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name='Registro' component={Register} options={{headerShown: false}} />
         {/* <Stack.Screen name='Login' component={Login} options={{headerShown: false}} /> */}
         <Stack.Screen name='Home' component={Home} options={{headerShown: false}} />
+        <Stack.Screen name='Camara' component={Camara} />
         {/* si implementamos tabnavigation para el resto de la app, el tercer componente debe ser una navegación que tenga a Home como primer screen */}
       </Stack.Navigator>
     </NavigationContainer>
