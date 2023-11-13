@@ -57,7 +57,12 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
     formContainer:{
-        paddingHorizontal:10,
+        flex: 1,
+        color:'rgb(255,255,255)',
+        padding:15,
+        justifyContent: 'center',
+        alignContent: 'center',
+        width: '100%',
         marginTop: 20,
     },
     input:{
@@ -71,20 +76,22 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#8E44AD',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#8E44AD'
     },
     textButton:{
         color: '#fff'
     }
 
 })
+
+
 
 
 export default Login;
