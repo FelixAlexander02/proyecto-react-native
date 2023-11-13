@@ -74,7 +74,7 @@ class Register extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({bio: text})}
-                    placeholder='password'
+                    placeholder='bio'
                     keyboardType='default'
                     value={this.state.bio}/>
                 <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
