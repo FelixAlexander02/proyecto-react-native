@@ -9,9 +9,9 @@ class Register extends Component {
             email:'',
             userName:'',
             password:'',
-            bio:'',
-            fotodeperfil:'',
-            errores:'',
+            // bio:'',
+            // fotodeperfil:'',
+            // errores:'',
         }
     }
 
@@ -71,13 +71,13 @@ class Register extends Component {
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}/>
-                <TextInput
+                {/* <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({bio: text})}
                     placeholder='bio'
                     keyboardType='default'
-                    value={this.state.bio}/>
-                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
+                    value={this.state.bio}/> */}
+                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
