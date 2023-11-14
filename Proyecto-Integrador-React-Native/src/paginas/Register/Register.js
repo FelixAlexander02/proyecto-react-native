@@ -8,10 +8,7 @@ class Register extends Component {
         this.state={
             email:'',
             userName:'',
-            password:'',
-            // bio:'',
-            // fotodeperfil:'',
-            // errores:'',
+            password:''
         }
     }
 
@@ -46,7 +43,7 @@ class Register extends Component {
       .catch(error=>{
         console.log(error);
       })
-    };
+    }
 
     render(){
         return(
@@ -71,12 +68,6 @@ class Register extends Component {
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}/>
-                {/* <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=>this.setState({bio: text})}
-                    placeholder='bio'
-                    keyboardType='default'
-                    value={this.state.bio}/> */}
                 <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>

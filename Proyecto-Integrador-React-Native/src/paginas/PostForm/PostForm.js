@@ -22,7 +22,7 @@ class PostForm extends Component {
                     keyboardType='default'
                     value={this.state.textoPost}/>
              
-                <TouchableOpacity style={styles.button} onPress={()=>}>
+                <TouchableOpacity style={styles.button} >
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
             </View>
@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#8E44AD',
+        backgroundColor:'#28a745',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#8E44AD'
+        borderColor: '#28a745'
     },
     textButton:{
         color: '#fff'
@@ -62,4 +62,5 @@ const styles = StyleSheet.create({
 })
 
 
-export default Register;
+
+export default PostForm;

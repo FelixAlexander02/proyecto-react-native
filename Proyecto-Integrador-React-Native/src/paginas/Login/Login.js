@@ -18,7 +18,7 @@ class Login extends Component {
         console.log('Login Ok');
 
         //redirigir al usuario a la home del sitio
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate('Menu')
 
       })
       .catch(error=>{
