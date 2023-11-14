@@ -11,7 +11,6 @@ const firebaseConfig = {
     appId: "1:142090268872:web:6242ea9b7052631d90b5fd"
   };
 
-<<<<<<< HEAD
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDvR0-3CXDImrRahYi4Ddfg7O4uUwjPdSI",
 //   authDomain: "desarrollo-de-blog.firebaseapp.com",
@@ -21,8 +20,6 @@ const firebaseConfig = {
 //   appId: "1:1009733647277:web:bd180355f5d10f43c0ff24"
 // };
 
-=======
->>>>>>> b4f08b50f92fa98c6283c3def252e02830d782f0
 app.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();

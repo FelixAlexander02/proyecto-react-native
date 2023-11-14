@@ -28,7 +28,7 @@ class Register extends Component {
         })
     }
     
-    register(email, pass){
+    register(email, pass, userName){
     auth.createUserWithEmailAndPassword(email , pass)
       .then(()=>{
         console.log('Registrado Ok');
@@ -38,7 +38,7 @@ class Register extends Component {
         db.collection('users').add({
             owner: auth.currentUser.email,
             userName: userName,
-            createdAt: Date.now(),
+            createdAt: Date.now(),  //crea fecha en el momento que esta ejecutandose 
         })
         .then( res => console.log(res) )
 
