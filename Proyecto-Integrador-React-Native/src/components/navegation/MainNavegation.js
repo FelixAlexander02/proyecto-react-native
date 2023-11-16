@@ -16,6 +16,7 @@ class MainNavegation extends Component {
           isLoading: false,
           isAuthenticated: false,
           user: null,
+
       }
     }
     
@@ -54,7 +55,7 @@ class MainNavegation extends Component {
                 <Stack.Navigator >
                     {this.state.isAuthenticated? 
                         <Stack.Screen name='authenticated'
-                        component={() => (<AutenticatedNavigation user={user} />)}
+                        component={AutenticatedNavigation}
                         options={{headerShown: false}} />
                         : 
                         <Stack.Screen name='unauthenticated'
