@@ -44,10 +44,10 @@ class Home extends Component{
         return(
             <View>
                 <Text>HOME</Text>
-                <TouchableOpacity onPress={()=>this.logout()}>-
+                <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
-
+                <Text> </Text>
                 <View>
                     <View>
                         <Text>Mis Posts</Text>

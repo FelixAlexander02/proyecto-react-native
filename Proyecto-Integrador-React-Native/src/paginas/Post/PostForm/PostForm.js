@@ -20,14 +20,14 @@ class PostForm extends Component {
     };
   }
 
-  postear() {
-    if (!this.state.textoPost) {
+  postear(textoPost, photoText ) {
+    if (!textoPost) {
       this.setState({
         errors: [...this.state.errors, "El texto del post es obligatorio"],
       });
     }
 
-    if(!this.state.photoText) {
+    if(!photoText) {
       this.setState({
         errors: [...this.state.errors, "La foto es obligatoria"],
       });
