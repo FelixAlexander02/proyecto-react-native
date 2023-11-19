@@ -1,5 +1,5 @@
-import react, { Component } from "react";
-import { db, auth } from "../../../firebase/config";
+import  { Component } from "react";
+import { db, auth, storage } from "../../../firebase/config";
 import {
   TextInput,
   TouchableOpacity,
@@ -20,24 +20,31 @@ class PostForm extends Component {
     };
   }
 
-  postear(textoPost, photoText ) {
-    if (!textoPost) {
+
+  postear() {
+    if (!this.state.textoPost) {
+
       this.setState({
         errors: [...this.state.errors, "El texto del post es obligatorio"],
       });
     }
 
-    if(!photoText) {
+
+    if(!this.state.photoText) {
+
       this.setState({
         errors: [...this.state.errors, "La foto es obligatoria"],
       });
     }
 
     if(this.state.errors.length === 0){
+      storage.ref(this.state.photoText).getDownloadURL()
+      .then(url => {
         db.collection("posts")
         .add({
             texto: this.state.textoPost,
-            photo: this.state.photoText,
+            photo: url,
+
             userId: auth.currentUser.uid,
             email: auth.currentUser.email,
             createdAt: Date.now(),
@@ -51,6 +58,11 @@ class PostForm extends Component {
         .catch((error) => {
             console.log(error);
         });
+      }).catch(error => {
+        console.log(error);
+        alert('error al cargar la imagen')
+      })
+
     }
   }
 

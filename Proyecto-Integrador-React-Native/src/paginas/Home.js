@@ -1,23 +1,25 @@
-import React, {Component} from "react";
-import { View , Text , TouchableOpacity , FlatList, TextInput , StyleSheet } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, TouchableOpacity, FlatList, TextInput, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
-import PostItemList from "./Post/PostItemList/PostItemList";
+import FlatListPosts from "../components/FlatListPosts/FlatListPosts";
 
-class Home extends Component{
-    constructor(){
-        super()
-        this.state={
-            myPosts: [],
-            OtherPosts: [],
 
+class Home extends Component {
+    constructor(props) {
+        super(props)
+        this.props = props
+        this.state = {
+            recentPosts: [],
         }
     }
 
     componentDidMount() {
+
+
         db.collection('posts')
-            .where('userId', '==', auth.currentUser.uid)
+            .orderBy('createdAt', 'desc')
             .onSnapshot(snap => {
-                const myPosts = snap.docs.map( doc => {
+                const recentPosts = snap.docs.map(doc => {
                     return {
                         id: doc.id,
                         texto: doc.data().texto,
@@ -29,35 +31,29 @@ class Home extends Component{
                         comments: doc.data().comments,
                     }
                 })
-                this.setState({myPosts})
+                this.setState({ recentPosts })
+
             })
     }
 
-    logout(){
+    logout() {
         auth.signOut();
         //redirigir al usuario a la home page 
         // this.props.navigation.navigator('Login')
     }
 
-    render(){
+    render() {
         console.log(this.state.myPosts)
-        return(
-            <View>
-                <Text>HOME</Text>
-                <TouchableOpacity onPress={()=>this.logout()}>
+        return (
+            <View style={styles.container}>
+
+                <TouchableOpacity onPress={() => this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
-                <Text> </Text>
-                <View>
+                <View style={styles.containerPost}>
                     <View>
-                        <Text>Mis Posts</Text>
-                        {this.state.myPosts.length === 0? 
-                            <Text>No hay posts</Text>
-                            :
-                            <View>
-                                {this.state.myPosts.map(post => <PostItemList key={post.id} texto={post.texto} photo={post.photo} />)}
-                                </View>
-                        }
+                        <Text>Posts Recientes</Text>
+                        <FlatListPosts posts={this.state.recentPosts} navigation={this.props.navigation} />
                     </View>
 
                 </View>
@@ -65,6 +61,27 @@ class Home extends Component{
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: 50,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        height: '100%'
+    },
+    containerPost: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        height: '100%',
+    },
+    containerPostSection: {
+        width: '25em',
+        height: '100em',
+    }
+})
 
 export default Home;
 

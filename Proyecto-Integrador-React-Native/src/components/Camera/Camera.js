@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Camera } from "expo-camera";
-import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { storage } from "../../firebase/config";
 
-import {
-  Ionicons,
-  AntDesign,
-} from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 class Camara extends Component {
   constructor(props) {
     super(props);
@@ -14,24 +17,24 @@ class Camara extends Component {
       permission: false,
       showCamera: false,
       photo: "",
+
       photoUrl: `${this.props.firebaseUrlToStore}-${Date.now()}.png`
     };
   }
 
   sacarFoto() {
-    
-    this.metodosDeCamara.takePictureAsync()
-        .then((photo) => {
-          this.setState({
-            photo: photo.uri,
-            showCamera: false,
-          });
-          console.log("foto uri ", photo);
-        })
-        .catch((error) => {
-          console.log(error);
+    this.metodosDeCamara
+      .takePictureAsync()
+      .then((photo) => {
+        this.setState({
+          photo: photo.uri,
+          showCamera: false,
         });
-    
+        console.log("foto uri ", photo);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   clearFoto() {
@@ -41,8 +44,10 @@ class Camara extends Component {
     });
   }
 
-  guardarFoto(){
+  guardarFoto() {
+    this.setState({ loading: true });
     fetch(this.state.photo)
+
         .then(res => res.blob())
         .then(imagen => {
             // cremos una referencia vacia a un punto del storage remoto
@@ -77,7 +82,7 @@ class Camara extends Component {
   render() {
     return (
       <View style={style.container}>
-        {this.state.showCamera && // si show camera esta en true muestra el fragmento
+        {this.state.showCamera && ( // si show camera esta en true muestra el fragmento
           <React.Fragment>
             <Camera
               style={style.camera}
@@ -93,23 +98,29 @@ class Camara extends Component {
               <Ionicons name="radio-button-on-sharp" size={66} color="white" />
             </TouchableOpacity>
           </React.Fragment>
-        }
+        )}
 
-        {this.state.photo && // si photo tiene un valor muestra el fragmento
+        {this.state.photo && ( // si photo tiene un valor muestra el fragmento
           <React.Fragment>
             <Image style={style.image} source={{ uri: this.state.photo }} />
-            
-            {/* opciones guardar y eliminar */ }
+
+            {/* opciones guardar y eliminar */}
             <View style={style.checksDiv}>
-              <TouchableOpacity onPress={() => this.clearFoto()}>
-                <Ionicons name="md-trash-sharp" size={40} color="red" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.guardarFoto()}>
-                <AntDesign name="checkcircle" size={40} color="green" />
-              </TouchableOpacity>
+              {this.state.loading ? (
+                <ActivityIndicator size="large" />
+              ) : (
+                <React.Fragment>
+                  <TouchableOpacity onPress={() => this.clearFoto()}>
+                    <Ionicons name="md-trash-sharp" size={40} color="red" />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.guardarFoto()}>
+                    <AntDesign name="checkcircle" size={40} color="green" />
+                  </TouchableOpacity>
+                </React.Fragment>
+              )}
             </View>
           </React.Fragment>
-        }
+        )}
       </View>
     );
   }
@@ -148,7 +159,7 @@ const style = StyleSheet.create({
     height: "100%",
   },
   checksDiv: {
-    padding: '2rem',
+    padding: "2rem",
     position: "absolute",
     flexDirection: "row",
     flex: 2,
