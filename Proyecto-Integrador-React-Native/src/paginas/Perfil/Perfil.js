@@ -8,6 +8,7 @@ class Perfil extends Component {
     super(props);
     this.state = {
       myPosts: [],
+      perfilUsuario: [],
     };
   }
 
@@ -29,6 +30,18 @@ class Perfil extends Component {
                 })
                 this.setState({myPosts})
             })
+    db.collection('users')
+            .where('userId', '==', auth.currentUser.uid)
+            .onSnapshot(snap => {
+                const perfilUsuario = snap.docs.map( doc => {
+                    return {
+                        userName: doc.data().userName,
+                        bio: doc.data().bio,
+                        avatar: doc.data().avatar,
+                    }
+                })
+                this.setState({perfilUsuario})
+            })
   }
 
   render() {
@@ -36,6 +49,8 @@ class Perfil extends Component {
         <View>
             <Text>Total de posteos {this.state.myPosts.length}</Text>
             <FlatListPosts posts={this.state.myPosts} />
+            <Text>{this.state.perfilUsuario}</Text>
+
         </View>
     );
 
