@@ -1,4 +1,4 @@
-import react, { Component } from "react";
+import  { Component } from "react";
 import { db, auth, storage } from "../../../firebase/config";
 import {
   TextInput,
@@ -20,27 +20,31 @@ class PostForm extends Component {
     };
   }
 
+
   postear() {
     if (!this.state.textoPost) {
+
       this.setState({
         errors: [...this.state.errors, "El texto del post es obligatorio"],
       });
     }
 
+
     if(!this.state.photoText) {
+
       this.setState({
         errors: [...this.state.errors, "La foto es obligatoria"],
       });
     }
 
     if(this.state.errors.length === 0){
-        
       storage.ref(this.state.photoText).getDownloadURL()
       .then(url => {
         db.collection("posts")
         .add({
             texto: this.state.textoPost,
             photo: url,
+
             userId: auth.currentUser.uid,
             email: auth.currentUser.email,
             createdAt: Date.now(),
@@ -58,6 +62,7 @@ class PostForm extends Component {
         console.log(error);
         alert('error al cargar la imagen')
       })
+
     }
   }
 

@@ -89,6 +89,7 @@ class PostItemList extends Component {
             </View>  
     )
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -108,3 +109,4 @@ const styles = StyleSheet.create({
     },
 });
 export default PostItemList;
+

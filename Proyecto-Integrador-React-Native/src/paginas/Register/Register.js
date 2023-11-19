@@ -68,7 +68,7 @@ class Register extends Component {
 
           const newUserData = {
             owner: auth.currentUser.email,
-            userName: userName,
+            userName,
             bio,
             avatar: this.state.avatar,
             createdAt: Date.now(), //crea fecha en el momento que esta ejecutandose
@@ -105,7 +105,8 @@ class Register extends Component {
             ))}
           </View>
         )}
-        <Text>Register</Text>
+
+        <Text>Registrarse</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({ email: text })}
@@ -136,6 +137,7 @@ class Register extends Component {
           keyboardType="default"
           multiline={true}
           numberOfLines={4}
+
           value={this.state.bio}
         />
         

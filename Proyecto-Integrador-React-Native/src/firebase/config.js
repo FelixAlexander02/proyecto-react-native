@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import firebase from 'firebase';
 
 // configuracion para entrega final
+
 // const firebaseConfig = {
 //     apiKey: "AIzaSyAgHPWio3unQwK7ZotWLKILADxjmpxd5D4",
 //     authDomain: "trabajo-final-prog3.firebaseapp.com",

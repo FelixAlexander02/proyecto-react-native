@@ -1,23 +1,25 @@
-import React, {Component} from "react";
-import { View , Text , TouchableOpacity , FlatList, TextInput , StyleSheet, Image } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, TouchableOpacity, FlatList, TextInput, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
 import FlatListPosts from "../components/FlatListPosts/FlatListPosts";
 
-class Home extends Component{
-    constructor(props){
+
+class Home extends Component {
+    constructor(props) {
         super(props)
         this.props = props
-        this.state={
+        this.state = {
             recentPosts: [],
         }
     }
 
     componentDidMount() {
 
+
         db.collection('posts')
             .orderBy('createdAt', 'desc')
             .onSnapshot(snap => {
-                const recentPosts = snap.docs.map( doc => {
+                const recentPosts = snap.docs.map(doc => {
                     return {
                         id: doc.id,
                         texto: doc.data().texto,
@@ -29,29 +31,31 @@ class Home extends Component{
                         comments: doc.data().comments,
                     }
                 })
-                this.setState({recentPosts})
+                this.setState({ recentPosts })
+
             })
     }
 
-    logout(){
+    logout() {
         auth.signOut();
         //redirigir al usuario a la home page 
         // this.props.navigation.navigator('Login')
     }
 
-    render(){
-        return(
+    render() {
+        console.log(this.state.myPosts)
+        return (
             <View style={styles.container}>
-                
-                <TouchableOpacity onPress={()=>this.logout()}>
+
+                <TouchableOpacity onPress={() => this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
-            
                 <View style={styles.containerPost}>
                     <View>
                         <Text>Posts Recientes</Text>
-                       <FlatListPosts posts={this.state.recentPosts} navigation={this.props.navigation} />
+                        <FlatListPosts posts={this.state.recentPosts} navigation={this.props.navigation} />
                     </View>
+
                 </View>
             </View>
         )
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
-        height:'100%'
+        height: '100%'
     },
     containerPost: {
         display: 'flex',

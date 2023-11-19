@@ -17,8 +17,8 @@ class Camara extends Component {
       permission: false,
       showCamera: false,
       photo: "",
-      photoUrl: `${this.props.firebaseUrlToStore}-${Date.now()}.png`,
-      loading: false,
+
+      photoUrl: `${this.props.firebaseUrlToStore}-${Date.now()}.png`
     };
   }
 
@@ -47,23 +47,22 @@ class Camara extends Component {
   guardarFoto() {
     this.setState({ loading: true });
     fetch(this.state.photo)
-      .then((res) => res.blob())
-      .then((imagen) => {
-        // cremos una referencia vacia a un punto del storage remoto
-        const referenciaAlStorage = storage.ref(this.state.photoUrl);
 
-        // cargamos la imagen en esa referencia
-        referenciaAlStorage.put(imagen).then((url) => {
-          console.log(url);
-          this.clearFoto();
-          this.props.setPhotoText(this.state.photoUrl);
-          // hace algo con la imagen guardada, almacenarla en el post del usuario por ejemplo
-          this.props.onFotoSacada();
-        });
-      })
-      .finally(() => {
-        this.setState({ loading: false });
-      });
+        .then(res => res.blob())
+        .then(imagen => {
+            // cremos una referencia vacia a un punto del storage remoto
+            const referenciaAlStorage = storage.ref(this.state.photoUrl)
+            
+            // cargamos la imagen en esa referencia
+            referenciaAlStorage.put(imagen)
+                .then((url) => {
+                    console.log(url)
+                    this.clearFoto()
+                    this.props.setPhotoText(this.state.photoUrl)
+                    // hace algo con la imagen guardada, almacenarla en el post del usuario por ejemplo
+                    this.props.onFotoSacada()
+                  })
+        })
   }
 
   componentDidMount() {
