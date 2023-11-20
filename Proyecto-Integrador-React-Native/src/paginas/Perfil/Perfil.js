@@ -7,6 +7,7 @@ class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user:[],
       myPosts: []
     };
   }
@@ -35,24 +36,43 @@ class Perfil extends Component {
     auth.signOut();
     //redirigir al usuario a la home page 
     // this.props.navigation.navigator('Login')
-}
+  }
 
   render() {
     return (
-        <View>
-            <Text>Total de posteos {this.state.myPosts.length}</Text>
+        <View style={styles.container}>
+            <Text style={styles.titulo}>Total de posteos {this.state.myPosts.length}</Text>
             <FlatListPosts posts={this.state.myPosts} />
-            <Image source={{uri: auth.currentUser.photoURL}} style={{width: 100, height: 100}} />
+            <Image source={{uri: auth.currentUser.photoURL}} style={styles.avatar}/> 
             <Text>{this.state.perfilUsuario}</Text>
             <TouchableOpacity onPress={() => this.logout()}>
-                <Text>Logout</Text>
+                <Text style={styles.titulo}>Logout</Text>
             </TouchableOpacity>
         </View>
     );
-
-
   }
+
+
 }
+
+const styles = StyleSheet.create({
+  container: {
+      padding: 50,
+      height: '100%',
+  },
+  avatar: {
+      height: 100,
+      width: 100,
+      borderRadius: "100%"
+  },
+  list:{
+      height: '100%',
+  },
+  titulo: {
+      fontSize: 25
+  },
+
+})
 
 export default Perfil;
 

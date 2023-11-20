@@ -44,7 +44,7 @@ class Home extends Component {
             <View style={styles.container}>
                 <View style={styles.containerPost}>
                     <View>
-                        <Text>Posts Recientes</Text>
+                        <Text style={styles.titulo}>Posts Recientes</Text>
                         <FlatListPosts posts={this.state.recentPosts} navigation={this.props.navigation} />
                     </View>
                 </View>
@@ -67,10 +67,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         width: '100%',
         height: '100%',
+        padding: 25
     },
     containerPostSection: {
         width: '25em',
         height: '100em',
+    },
+    titulo: {
+        fontSize: 40,
     }
 })
 

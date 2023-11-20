@@ -60,8 +60,6 @@ const styles = StyleSheet.create({
         flex: 1,
         color:'rgb(255,255,255)',
         padding:15,
-        justifyContent: 'center',
-        alignContent: 'center',
         width: '100%',
         marginTop: 20,
     },

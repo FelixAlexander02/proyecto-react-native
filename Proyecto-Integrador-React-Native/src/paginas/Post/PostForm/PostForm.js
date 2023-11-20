@@ -81,6 +81,7 @@ class PostForm extends Component {
 
         {this.state.showCamara && (
           <Camara
+            style={styles.camara}
             setPhotoText={(text) => {
               this.setState({ photoText: text });
             }}
@@ -117,18 +118,21 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: {
-    backgroundColor: "#28a745",
+    backgroundColor: "#8E44AD",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "#28a745",
+    borderColor: "#8E44AD",
   },
   textButton: {
     color: "#fff",
   },
+  camara: {
+    height: 100,
+  }
 });
 
 export default PostForm;

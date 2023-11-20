@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  StyleSheet,
 } from "react-native";
 import { db, auth } from "../../../firebase/config";
 import firebase from "firebase";
@@ -100,19 +101,18 @@ class Comments extends Component {
   }
   render() {
 
-    
-
     console.log("comentarios", this.state.comments.length);
     return (
-      <View>
-        <Text>
-          Comentarios del post numero {this.props.route.params.post.id}
+      <View style={styles.formContainer}>
+        <Text style={styles.titulo}>
+          Comentarios del post
         </Text>
         {this.state.isLoading ? (
           <ActivityIndicator color={"blue"} />
         ) : (
           <View>
             <FlatList
+              style={styles.commentsContainer}
               data={this.state.comments}
               renderItem={(item) => 
                 <CommentItem comment={item.item} navigation={this.props.navigation} />
@@ -124,19 +124,21 @@ class Comments extends Component {
             />
 
             <View>
-              <TextInput
+              <TextInput 
+                style={styles.input}
                 placeholder="ingresa un comentario"
                 onChangeText={(text) => {
                   this.setState({ comment: text });
                 }}
               />
               <TouchableOpacity
+                style={styles.button}
                 disabled={!this.state.buttonCommentIsActive}
                 onPress={() => {
                   this.comentar();
                 }}
               >
-                <Text>Commentar</Text>
+                <Text style={styles.textButton}>Comentar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -145,5 +147,49 @@ class Comments extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  formContainer: {
+    paddingHorizontal: 10,
+    marginTop: 20,
+  },
+  input: {
+    height: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderStyle: "solid",
+    borderRadius: 6,
+    marginVertical: 10,
+  },
+  inputTextArea: {
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginVertical: 10,
+    paddingVertical: 15,
+  },
+  button: {
+    backgroundColor: "#8E44AD",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: "center",
+    borderRadius: 4,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#8E44AD",
+  },
+  textButton: {
+    color: "#fff",
+  },
+  commentsContainer: {
+    padding: 30
+  },
+  titulo: {
+    fontSize: 20,
+
+  }
+});
 
 export default Comments;

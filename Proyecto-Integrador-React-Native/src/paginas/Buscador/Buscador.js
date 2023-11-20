@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { View, Text, FlatList, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet} from "react-native";
 import {db, auth} from '../../firebase/config';
 
 
@@ -32,15 +32,14 @@ class Buscador extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Buscador de usuarios</Text>
+            <View style={styles.formContainer}>
 
-                <TextInput
+                <TextInput style={styles.input}
                     placeholder="Buscar usuario" 
                     onChangeText={(text) =>this.setState({textoBuscado: text})}
                 />
-                <TouchableOpacity onPress={() => this.buscarUsuario()}>
-                    <Text>Buscar</Text>
+                <TouchableOpacity style={styles.button} onPress={() => this.buscarUsuario()}>
+                    <Text style={styles.textButton}>Buscar</Text>
                 </TouchableOpacity>
                 <FlatList
                     data={this.state.usuarios}
@@ -63,5 +62,43 @@ class Buscador extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    formContainer: {
+      paddingHorizontal: 10,
+      marginTop: 20,
+    },
+    input: {
+      height: 20,
+      paddingVertical: 15,
+      paddingHorizontal: 10,
+      borderWidth: 1,
+      borderColor: "#ccc",
+      borderStyle: "solid",
+      borderRadius: 6,
+      marginVertical: 10,
+    },
+    inputTextArea: {
+      borderRadius: 6,
+      borderWidth: 1,
+      borderColor: "#ccc",
+      marginVertical: 10,
+      paddingVertical: 15,
+    },
+    button: {
+      backgroundColor: "#8E44AD",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      textAlign: "center",
+      borderRadius: 4,
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#8E44AD",
+    },
+    textButton: {
+      color: "#fff",
+    },
+  });
+
 
 export default Buscador;

@@ -51,7 +51,7 @@ class PostItemList extends Component {
     const navigation = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>{this.props.text}</Text>
+        <Text>{this.props.post.email}: "{this.props.post.texto}"</Text>
         <Image
             style={styles.image}
             source={{ uri: this.props.post.photo }}
@@ -95,8 +95,11 @@ const styles = StyleSheet.create({
     container: {
         width: 300,
         border: "1px solid black",
-        borderRadius: 10,
+        borderRadius: 25,
+        borderBottomWidth:20,
         padding: 10,
+        margin: 30,
+        backgroundColor: "#ecbfff"
     },
     image: {
         width: 150,
