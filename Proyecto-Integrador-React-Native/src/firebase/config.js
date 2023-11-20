@@ -22,7 +22,7 @@ const firebaseConfig = {
 //   appId: "1:1009733647277:web:bd180355f5d10f43c0ff24"
 // };
 
-// Configuracion Andres
+// Configuracion 3
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDQfzlZrEb4nnAN_UT8T1AP_1Lyntb8j2k",
 //   authDomain: "blog-52e28.firebaseapp.com",

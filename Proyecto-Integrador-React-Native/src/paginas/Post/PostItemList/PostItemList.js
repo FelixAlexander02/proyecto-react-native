@@ -49,7 +49,6 @@ class PostItemList extends Component {
 
   render() {
     const navigation = this.props.navigation;
-    console.log('this.props.navigation', this.props.navigation);
     return (
       <View style={styles.container}>
         <Text>{this.props.text}</Text>
@@ -94,18 +93,15 @@ class PostItemList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width: "100%",
-        height: 150,
+        width: 300,
         border: "1px solid black",
         borderRadius: 10,
         padding: 10,
     },
     image: {
-        flex: 1,
-        width: "100%",
-        height: 100,
-
+        width: 150,
+        height: 150,
+        borderRadius: 10,
     },
 });
 export default PostItemList;

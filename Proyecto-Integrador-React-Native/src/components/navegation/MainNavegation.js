@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import UnautenticatedNavigation from "./UnautenticatedNavigation";
 import AutenticatedNavigation from "./AutenticatedNavigation";
 import Comments from "../../paginas/Post/commets/Comments";
+import PerfilPublico from "../../paginas/Perfil/PerfilPublico";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,7 @@ class MainNavegation extends Component {
               }
               {/* rutas visibles tanto para usuarios autenticados como no autenticados */}
               <Stack.Screen name='Comments' component={Comments} />
+              <Stack.Screen name="PerfilPublico" component={PerfilPublico} />
             </Stack.Navigator>
         }
       </NavigationContainer>

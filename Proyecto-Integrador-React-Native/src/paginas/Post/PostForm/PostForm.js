@@ -38,13 +38,10 @@ class PostForm extends Component {
     }
 
     if(this.state.errors.length === 0){
-      storage.ref(this.state.photoText).getDownloadURL()
-      .then(url => {
         db.collection("posts")
         .add({
             texto: this.state.textoPost,
-            photo: url,
-
+            photo: this.state.photoText,
             userId: auth.currentUser.uid,
             email: auth.currentUser.email,
             createdAt: Date.now(),
@@ -58,11 +55,6 @@ class PostForm extends Component {
         .catch((error) => {
             console.log(error);
         });
-      }).catch(error => {
-        console.log(error);
-        alert('error al cargar la imagen')
-      })
-
     }
   }
 

@@ -85,6 +85,15 @@ class Register extends Component {
             }).catch((error) => {
             console.log(error);
             })
+
+            auth.currentUser.updateProfile({
+                displayName: userName,
+                photoURL: this.state.avatar,
+            })
+            .then()
+            .catch(error => {
+                console.log(error);
+            })
         // catch de registro de usuario
         .catch((error) => {
           console.log(error);
@@ -150,7 +159,7 @@ class Register extends Component {
 
         {this.state.showCamera && 
         <Camara
-             setPhotoText={(text)=> {this.setState({avatar: text})}} 
+            setPhotoText={(text)=> {this.setState({avatar: text})}} 
             firebaseUrlToStore="photos/user/avatar"
             onFotoSacada= {
                 () => {

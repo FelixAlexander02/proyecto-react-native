@@ -7,8 +7,7 @@ class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myPosts: [],
-      perfilUsuario: [],
+      myPosts: []
     };
   }
 
@@ -30,18 +29,7 @@ class Perfil extends Component {
                 })
                 this.setState({myPosts})
             })
-    db.collection('users')
-            .where('userId', '==', auth.currentUser.uid)
-            .onSnapshot(snap => {
-                const perfilUsuario = snap.docs.map( doc => {
-                    return {
-                        userName: doc.data().userName,
-                        bio: doc.data().bio,
-                        avatar: doc.data().avatar,
-                    }
-                })
-                this.setState({perfilUsuario})
-            })
+    
   }
 
   render() {
