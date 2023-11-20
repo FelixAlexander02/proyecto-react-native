@@ -16,11 +16,45 @@ class Comments extends Component {
     super(props);
     this.state = {
       comments: [],
+      commentsInPost: this.props.route.params.post.comments,
       isLoading: true,
       comment: "",
       buttonCommentIsActive: false,
     };
   }
+
+  cargarComments() {
+    this.setState({ isLoading: true, comments: [] })
+    db.collection("posts").doc(this.props.route.params.post.id).onSnapshot((snap) => {
+      this.setState({ commentsInPost: snap.data().comments });
+    })
+    
+    if (this.props.route.params.post.comments.length === 0) {
+      this.setState({ isLoading: false });
+      return;
+    }
+
+    db.collection("comments")
+      .where(firebase.firestore.FieldPath.documentId(), "in", this.state.commentsInPost)
+      //.orderBy("createdAt", "desc")
+      .onSnapshot((snap) => {
+        console.log("snap", snap.docs);
+        const comments = snap.docs.map((doc) => {
+          return {
+            id: doc.id,
+            text: doc.data().text,
+            userId: doc.data().userId,
+            userName: doc.data().userName,
+            userEmail: doc.data().userEmail,
+            createdAt: doc.data().createdAt,
+          };
+        });
+        const commentsSortByCreatedAt = comments.sort((a, b) => {
+            return b.createdAt - a.createdAt;
+        })
+        this.setState({ comments: commentsSortByCreatedAt, isLoading: false });
+      });
+    }
 
   comentar() {
     if (this.state.comment !== "") {
@@ -39,7 +73,7 @@ class Comments extends Component {
               comments: firebase.firestore.FieldValue.arrayUnion(commentDoc.id),
             })
             .then(() => {
-              console.log("agregado comentario");
+              this.cargarComments()
             })
             .catch((error) => console.log(error.message));
         })
@@ -62,31 +96,7 @@ class Comments extends Component {
   }
 
   componentDidMount() {
-    if (this.props.route.params.post.comments.length === 0) {
-      this.setState({ isLoading: false });
-      return;
-    }
-
-    db.collection("comments")
-      .where(firebase.firestore.FieldPath.documentId(), "in", this.props.route.params.post.comments)
-      //.orderBy("createdAt", "desc")
-      .onSnapshot((snap) => {
-        console.log("snap", snap.docs);
-        const comments = snap.docs.map((doc) => {
-          return {
-            id: doc.id,
-            text: doc.data().text,
-            userId: doc.data().userId,
-            userName: doc.data().userName,
-            userEmail: doc.data().userEmail,
-            createdAt: doc.data().createdAt,
-          };
-        });
-        const commentsSortByCreatedAt = comments.sort((a, b) => {
-            return b.createdAt - a.createdAt;
-        })
-        this.setState({ comments: commentsSortByCreatedAt, isLoading: false });
-      });
+    this.cargarComments();
   }
   render() {
 

@@ -36,26 +36,17 @@ class Home extends Component {
             })
     }
 
-    logout() {
-        auth.signOut();
-        //redirigir al usuario a la home page 
-        // this.props.navigation.navigator('Login')
-    }
+    
 
     render() {
         console.log(this.state.myPosts)
         return (
             <View style={styles.container}>
-
-                <TouchableOpacity onPress={() => this.logout()}>
-                    <Text>Logout</Text>
-                </TouchableOpacity>
                 <View style={styles.containerPost}>
                     <View>
                         <Text>Posts Recientes</Text>
                         <FlatListPosts posts={this.state.recentPosts} navigation={this.props.navigation} />
                     </View>
-
                 </View>
             </View>
         )
